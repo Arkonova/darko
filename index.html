@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>Darko Token</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="https://darko.arkonova.ru/logo_mini.png">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <style>
     html, body {
@@ -11,10 +13,10 @@
       width: 100%;
       min-height: 100%;
       background: radial-gradient(rgb(16, 27, 42), rgba(47, 56, 77, 0.9));
+      background: #242232;
       color: white;
       font-family: Arial, sans-serif;
       overflow-x: hidden;
-      background: #242232;
     }
     .container-custom {
       padding: 20px;
@@ -45,6 +47,7 @@
     .top-logo img {
       height: 100%;
       border-radius: 50%;
+      object-fit: cover;
     }
     .header {
       text-align: center;
@@ -54,7 +57,7 @@
       position: fixed;
       top: 20px;
       right: 20px;
-      background: rgba(0, 0, 0, 0.9); 
+      background: rgba(0, 0, 0, 0.9);
       padding: 10px 15px;
       border-radius: 5px;
       cursor: pointer;
@@ -140,10 +143,7 @@
   </style>
 </head>
 <body>
-  <button id="languageSwitcher" class="btn btn-default" style="
-    background-color: #6f89e8;
-    color: #ffffff; border-color: #6f89e8;
-">RU</button>
+  <button id="languageSwitcher" class="btn btn-default" style="background-color: #6f89e8; color: #ffffff; border-color: #6f89e8;">RU</button>
   <div class="container container-custom">
     <div class="top-logo visible">
       <img src="https://darko.arkonova.ru/logo_mini.png" alt="Логотип">
@@ -210,18 +210,15 @@
         <div class="block visible">
           <p class="text-center" data-i18n="buyHeading" style="font-size: 30px;">Buy DARKO</p>
           <div class="text-center">
-            <div class="circle-logo plaz-1">
+            <div class="circle-logo">
               <img src="./dedust.png" alt="DeDust">
             </div>
-            <div class="circle-logo plaz-2">
+            <div class="circle-logo">
               <img src="https://darko.arkonova.ru/logo_mini.png" alt="Darko">
             </div>
           </div>
           <div class="text-center">
-            <button class="btn btn-primary btn-lg btn-custom" data-i18n="buyButton"  style="
-    background-color: #9761ec;
-    color: #ffffff; border-color: #9761ec;
-" action="https://dedust.io/swap/TON/EQBEGdw9Y8rKUFDEv0WlPqpPspBs1yUFRANMLqEkTE4Z2eGL" target="_blank">Buy DARKO</button>
+            <button class="btn btn-primary btn-lg btn-custom" data-i18n="buyButton" style="background-color: #9761ec; color: #ffffff; border-color: #9761ec;" action="https://dedust.io/swap/TON/EQBEGdw9Y8rKUFDEv0WlPqpPspBs1yUFRANMLqEkTE4Z2eGL" target="_blank">Buy DARKO</button>
           </div>
         </div>
         <div class="block visible">
@@ -235,11 +232,9 @@
             </div>
           </div>
           <div class="text-center">
-            <button class="btn btn-primary btn-lg btn-custom" data-i18n="tonButton" id="TON" style="
-    background-color: #9761ec;
-    color: #ffffff; border-color: #9761ec;
-" action="https://ton.org" target="_blank">The Open Network</button>
+            <button class="btn btn-primary btn-lg btn-custom" data-i18n="tonButton" id="TON" style="background-color: #9761ec; color: #ffffff; border-color: #9761ec;" action="https://ton.org" target="_blank">The Open Network</button>
           </div>
+          <p class="text-center" style="margin-top:15px;">Token released on TON</p>
         </div>
       </div>
     </div>
@@ -283,6 +278,7 @@
         blocks.forEach(block => block.classList.add('visible'));
       }
     });
+
     const translations = {
       en: {
         headerTitle: "Darko",
@@ -346,6 +342,7 @@
         tonConnector.textContent = translations[lang]['tonConnected'];
       }
     }
+
     document.getElementById('languageSwitcher').addEventListener('click', function() {
       currentLang = currentLang === 'en' ? 'ru' : 'en';
       translatePage(currentLang);
