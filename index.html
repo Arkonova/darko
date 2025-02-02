@@ -1,50 +1,369 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DARKO Token</title>
-    <style>
-        body {
-            background-color: #0d0d0d;
-            color: #fff;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 50px;
-        }
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
-        }
-        h1 {
-            color: #ff0000;
-        }
-        p {
-            font-size: 18px;
-            line-height: 1.5;
-        }
-        .btn {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            color: #fff;
-            background: #ff0000;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: 0.3s;
-        }
-        .btn:hover {
-            background: #cc0000;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Darko Token</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      min-height: 100%;
+      background: radial-gradient(rgb(16, 27, 42), rgba(47, 56, 77, 0.9));
+      color: white;
+      font-family: Arial, sans-serif;
+      overflow-x: hidden;
+      background: #242232;
+    }
+    .container-custom {
+      padding: 20px;
+    }
+    .block {
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+      border-radius: 25px;
+      margin-bottom: 30px;
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    .block.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .top-logo {
+      width: 100%;
+      height: 200px;
+      border-radius: 25px;
+      overflow: hidden;
+      margin: 20px 0;
+      position: relative;
+      display: flex;
+      justify-content: center;
+    }
+    .top-logo img {
+      height: 100%;
+      border-radius: 50%;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .ton-connector {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: rgba(0, 0, 0, 0.9); 
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      z-index: 1000;
+      border: 1px solid #fff;
+    }
+    #languageSwitcher {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1000;
+    }
+    .circle-logo {
+      display: inline-block;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      margin: 0 15px;
+      line-height: 60px;
+      text-align: center;
+      vertical-align: middle;
+      overflow: hidden;
+    }
+    .circle-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .gecko-iframe {
+      width: 100%;
+      height: 300px;
+      border-radius: 15px;
+    }
+    .timeline {
+      position: relative;
+      margin: 20px 0;
+      padding-left: 20px;
+      border-left: 2px solid rgba(255,255,255,0.3);
+    }
+    .timeline-item {
+      margin-bottom: 20px;
+      position: relative;
+    }
+    .timeline-item:before {
+      content: "";
+      position: absolute;
+      left: -9px;
+      top: 0;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: #fff;
+      border: 2px solid #fff;
+    }
+    .timeline-item.completed:before {
+      background: #5cb85c;
+      border-color: #5cb85c;
+    }
+    .timeline-item h4 {
+      margin: 0 0 5px 15px;
+      font-size: 16px;
+    }
+    .timeline-item p {
+      margin: 0;
+      font-size: 14px;
+      margin-left: 15px;
+    }
+    .btn-custom {
+      margin-top: 15px;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: rgba(0,0,0,0.5);
+      margin-top: 30px;
+    }
+    footer a {
+      color: #fff;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1> DARKO Token</h1>
+  <button id="languageSwitcher" class="btn btn-default" style="
+    background-color: #6f89e8;
+    color: #ffffff; border-color: #6f89e8;
+">RU</button>
+  <div class="container container-custom">
+    <div class="top-logo visible">
+      <img src="https://darko.arkonova.ru/logo_mini.png" alt="Логотип">
     </div>
+    <div class="header block visible">
+      <h1 data-i18n="headerTitle">Darko</h1>
+      <p data-i18n="headerSubtitle">Your key to exploring the world of artificial intelligence with Arkonova AI team</p>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 col-xs-12">
+        <div class="block visible" style="height: 345px;">
+          <div class="row">
+            <div class="col-xs-8">
+              <h2 data-i18n="tokenHeading">Darko</h2>
+              <p data-i18n="tokenParagraph" style="width: 40vh;">
+                The Arkonova AI Token is not just a digital asset, but an exclusive token from the Arkonova AI team, designed to immerse users in the world of Artificial Intelligence and cryptocurrency. Earn tokens by exploring and interacting with the Arkonova AI project. This token symbolizes your participation in a groundbreaking ecosystem, where you can unlock unique rewards while contributing to the evolution of both AI and cryptocurrency technologies.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-xs-12">
+        <div class="block visible">
+          <iframe class="gecko-iframe" id="geckoterminal-embed" title="GeckoTerminal Embed" 
+            src="https://www.geckoterminal.com/ru/ton/pools/EQC3K9PrfRSrhaeKCWDUKKNzeeJbt0vN3W79bJjrLkTRNAi7?embed=1&info=1&swaps=0&grayscale=1&light_chart=0" 
+            frameborder="0" allow="clipboard-write" allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 col-xs-12">
+        <div class="block visible" style="height: 498px;">
+          <h2 data-i18n="roadmapHeading">Roadmap</h2>
+          <div class="timeline">
+            <div class="timeline-item completed">
+              <h4 data-i18n="timeline1">Token Creation</h4>
+            </div>
+            <div class="timeline-item completed">
+              <h4 data-i18n="timeline2">Liquidity Pool Launch</h4>
+            </div>
+            <div class="timeline-item">
+              <h4 data-i18n="timeline3">Asset Distribution</h4>
+            </div>
+            <div class="timeline-item">
+              <h4 data-i18n="timeline4">Integration in Arkonova AI Ecosystem</h4>
+            </div>
+            <div class="timeline-item">
+              <h4 data-i18n="timeline5">Listing with DeDust</h4>
+            </div>
+            <div class="timeline-item">
+              <h4 data-i18n="timeline6">Listing on additional exchanges</h4>
+            </div>
+            <div class="timeline-item">
+              <h4 data-i18n="timeline7">Decentralized Governance</h4>
+            </div>
+            <div class="timeline-item">
+              <h4 data-i18n="timeline8">Token Burn</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-xs-12">
+        <div class="block visible">
+          <p class="text-center" data-i18n="buyHeading" style="font-size: 30px;">Buy DARKO</p>
+          <div class="text-center">
+            <div class="circle-logo plaz-1">
+              <img src="./dedust.png" alt="DeDust">
+            </div>
+            <div class="circle-logo plaz-2">
+              <img src="https://darko.arkonova.ru/logo_mini.png" alt="Darko">
+            </div>
+          </div>
+          <div class="text-center">
+            <button class="btn btn-primary btn-lg btn-custom" data-i18n="buyButton"  style="
+    background-color: #9761ec;
+    color: #ffffff; border-color: #9761ec;
+" action="https://dedust.io/swap/TON/EQBEGdw9Y8rKUFDEv0WlPqpPspBs1yUFRANMLqEkTE4Z2eGL" target="_blank">Buy DARKO</button>
+          </div>
+        </div>
+        <div class="block visible">
+          <p class="text-center" data-i18n="tonReleasedHeading" style="font-size: 30px;">Darko released on TON</p>
+          <div class="text-center">
+            <div class="circle-logo">
+              <img src="./ton_symbol.png" alt="TON">
+            </div>
+            <div class="circle-logo">
+              <img src="https://darko.arkonova.ru/logo_mini.png" alt="Darko">
+            </div>
+          </div>
+          <div class="text-center">
+            <button class="btn btn-primary btn-lg btn-custom" data-i18n="tonButton" id="TON" style="
+    background-color: #9761ec;
+    color: #ffffff; border-color: #9761ec;
+" action="https://ton.org" target="_blank">The Open Network</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="block visible">
+          <h2 data-i18n="obtainTokenHeading">How to obtain token in Arkonova AI</h2>
+          <p data-i18n="obtainTokenParagraph">
+            Tokens are credited as the user explores the Arkonova AI platform and interacts with its resources. In addition, participating in model training allows you to receive higher income.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <p>&copy; Arkonova AI 2023</p>
+    <p>
+      <a href="https://dedust.io" target="_blank">DeDust</a>
+      <a href="https://ton.org" target="_blank">TON</a>
+      <a href="https://www.geckoterminal.com" target="_blank">GeckoTerminal</a>
+    </p>
+  </footer>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const blocks = document.querySelectorAll('.block:not(.visible)');
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries, observerInstance) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observerInstance.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.2 });
+        blocks.forEach(block => observer.observe(block));
+      } else {
+        blocks.forEach(block => block.classList.add('visible'));
+      }
+    });
+    const translations = {
+      en: {
+        headerTitle: "Darko",
+        headerSubtitle: "Your key to exploring the world of artificial intelligence with Arkonova AI team",
+        tokenHeading: "Darko",
+        tokenParagraph: "The Arkonova AI Token is not just a digital asset, but an exclusive token from the Arkonova AI team, designed to immerse users in the world of Artificial Intelligence and cryptocurrency. Earn tokens by exploring and interacting with the Arkonova AI project. This token symbolizes your participation in a groundbreaking ecosystem, where you can unlock unique rewards while contributing to the evolution of both AI and cryptocurrency technologies.",
+        roadmapHeading: "Roadmap",
+        timeline1: "Token Creation",
+        timeline2: "Liquidity Pool Launch",
+        timeline3: "Asset Distribution",
+        timeline4: "Integration in Arkonova AI Ecosystem",
+        timeline5: "Listing with DeDust",
+        timeline6: "Listing on additional exchanges",
+        timeline7: "Decentralized Governance",
+        timeline8: "Token Burn",
+        buyHeading: "Buy DARKO",
+        buyButton: "Buy DARKO",
+        tonReleasedHeading: "Darko released on TON",
+        tonButton: "The Open Network",
+        obtainTokenHeading: "How to obtain token in Arkonova AI",
+        obtainTokenParagraph: "Tokens are credited as the user explores the Arkonova AI platform and interacts with its resources. In addition, participating in model training allows you to receive higher income.",
+        tonConnector: "Ton Connector",
+        tonConnected: "Balance: 100 Darko"
+      },
+      ru: {
+        headerTitle: "Darko",
+        headerSubtitle: "Ваш ключ к исследованию мира искусственного интеллекта с командой Arkonova AI",
+        tokenHeading: "Darko",
+        tokenParagraph: "Токен Arkonova AI — это не просто цифровой актив, а эксклюзивный токен команды Arkonova AI, созданный для погружения пользователей в мир искусственного интеллекта и криптовалют. Зарабатывайте токены, исследуя и взаимодействуя с проектом Arkonova AI. Этот токен символизирует ваше участие в революционной экосистеме, где вы можете получить уникальные награды, внося вклад в развитие как технологий ИИ, так и криптовалют.",
+        roadmapHeading: "Дорожная карта",
+        timeline1: "Создание токена",
+        timeline2: "Запуск пулов ликвидности",
+        timeline3: "Распределение активов",
+        timeline4: "Интеграция в экосистему Arkonova AI",
+        timeline5: "Листинг с DeDust",
+        timeline6: "Выход на дополнительные биржи",
+        timeline7: "Децентрализация управления",
+        timeline8: "Сжигание избыточных токенов",
+        buyHeading: "Купить DARKO",
+        buyButton: "Купить DARKO",
+        tonReleasedHeading: "Darko выпущен в сети TON",
+        tonButton: "The Open Network",
+        obtainTokenHeading: "Как получить токен в Arkonova AI",
+        obtainTokenParagraph: "Токен начисляется по мере изучения пользователем ресурсов платформы Arkonova AI и взаимодействия с ними. Дополнительно участие в обучениях моделей позволяет получать более высокий доход.",
+        tonConnector: "Ton Connector",
+        tonConnected: "Баланс: 100 Darko"
+      }
+    };
+
+    let currentLang = 'en';
+
+    function translatePage(lang) {
+      document.querySelectorAll('[data-i18n]').forEach(elem => {
+        const key = elem.getAttribute('data-i18n');
+        if (translations[lang] && translations[lang][key]) {
+          elem.textContent = translations[lang][key];
+        }
+      });
+      const tonConnector = document.getElementById('tonConnector');
+      if (tonConnector && tonConnector.dataset.connected) {
+        tonConnector.textContent = translations[lang]['tonConnected'];
+      }
+    }
+    document.getElementById('languageSwitcher').addEventListener('click', function() {
+      currentLang = currentLang === 'en' ? 'ru' : 'en';
+      translatePage(currentLang);
+      this.textContent = currentLang === 'en' ? 'RU' : 'EN';
+    });
+
+    document.getElementById('tonConnector').addEventListener('click', function() {
+      if (!this.dataset.connected) {
+        this.dataset.connected = "true";
+        this.textContent = translations[currentLang]['tonConnected'];
+      } else {
+        alert("Кошелек уже подключен!");
+      }
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+      translatePage(currentLang);
+    });
+  </script>
 </body>
 </html>
